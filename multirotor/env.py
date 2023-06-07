@@ -84,7 +84,8 @@ class BaseMultirotorEnv(gym.Env):
             if x is not None:
                 self.vehicle.state = np.asarray(x, self.vehicle.dtype)
         # needed by reward() to calculate deviation from straight line
-        self._des_unit_vec = - self.state[:3] / np.linalg.norm(self.state[:3])
+        # self._des_unit_vec = - self.state[:3] / np.linalg.norm(self.state[:3])
+        self._des_unit_vec = np.array([1, 1, 1])
         return self.state
 
 
@@ -246,5 +247,8 @@ class SpeedsMultirotorEnv(BaseMultirotorEnv):
             disturb_forces=disturb_forces,
             disturb_torques=disturb_torques
         )
-        reward = self.reward(state, action, nstate)
-        return nstate, reward, self._done, {}
+        if self.vehicle.state[2] <= 0:
+            self.vehicle.state[5] = max(0, self.vehicle.state[5])
+        self.vehicle.state[2] = max(0, self.vehicle.state[2])
+        reward = self.reward(state, action, self.state)
+        return self.vehicle.state, reward, self._done, {}
