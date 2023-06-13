@@ -247,6 +247,8 @@ class SpeedsMultirotorEnv(BaseMultirotorEnv):
             disturb_forces=disturb_forces,
             disturb_torques=disturb_torques
         )
+        # if self.vehicle.state[2] <= 0:
+        #     self.vehicle.state[2:12] = np.zeros(10)
         if self.vehicle.state[2] <= 0:
             self.vehicle.state[5] = max(0, self.vehicle.state[5])
         self.vehicle.state[2] = max(0, self.vehicle.state[2])
