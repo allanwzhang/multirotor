@@ -1,0 +1,4 @@
+849.33 fps T=0.010 dt=0.589 frame=0.0 rate=100
+30.16 fps T=5.010 dt=16.578 frame=500.0 rate=100
+31.45 fps T=10.010 dt=15.899 frame=1000.0 rate=100
+30.79 fps T=15.010 dt=16.241 frame=1500.0 rate=100
