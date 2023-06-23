@@ -46,8 +46,6 @@ def thrust(
     thrust = eta * 2 * vi * rho * A * vprime
     return thrust
 
-
-
 @njit
 def torque(
     position_vector: np.ndarray, force: np.ndarray,
