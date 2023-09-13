@@ -1,37 +1,15 @@
-# multirotor
+# multirotor and Ardupilot integration
 
 Simulation of multi-rotor unmanned aerial vehicles in python.
 
-This package provides an object-oriented interface for modeling and simulating motors, propellers, and airframe of a UAV. Additionally, an OpenAI gym-compatible environment is provided for Reinforcement Learning experiments.
-
-See the [Detailed Demo](/Detailed%20Demo.ipynb) jupyter notebook in the repository for a walkthrough.
-
-Code repository: [Github](https://github.com/hazrmard/multirotor), [Gitlab](https://git.isis.vanderbilt.edu/ahmedi/multirotor)
-
-Please cite this as:
-
-```
-@inproceedings{ahmed2022multirotor,
-    title={A high-Fidelity Simulation test-Bed for fault-Tolerant octo-Rotor Control Using Reinforcement Learning},
-    author={Ahmed, Ibrahim and Quinones-Grueiro, Marcos and Biswas, Gautam},
-    booktitle={2022 IEEE/AIAA 41st Digital Avionics Systems Conference (DASC)},
-    year={2022},
-    organization={IEEE}
-}
-```
+This package provides an object-oriented interface for modeling and simulating motors, propellers, and airframe of a UAV.
 
 ## Installation
 
-Install from the Python Package Index (PyPI):
+Clone repository and install for development. This will allow you to change the code of the package so the changes show up when you `import multirotor` in other projects.
 
 ```bash
-pip install multirotor
-```
-
-Or, clone repository and install for development. This will allow you to change the code of the package so the changes show up when you `import multirotor` in other projects.
-
-```bash
-git clone https://github.com/hazrmard/multirotor.git
+git clone https://github.com/allanwzhang/multirotor.git
 cd multirotor
 pip install -e .
 
@@ -39,8 +17,13 @@ pip install -e .
 pip install -e .[DEV]
 ```
 
+Make sure Ardupilot is installed. If not follow these instructions: [18.04](https://github.com/allanwzhang/python-gazebo/blob/main/installArdupilot18.md), [20.04](https://github.com/allanwzhang/python-gazebo/blob/main/installArdupilot20.md)
+
 ## Usage
-
-```python
-
+### Start Ardupilot
+From the ardupilot directory
+```bash
+cd ArduCopter
+sim_vehicle.py -v ArduCopter -f octa --model JSON --console
+# may need to run conda deactivate first
 ```
