@@ -1,6 +1,6 @@
 # multirotor and Ardupilot integration
 
-Simulation of multi-rotor unmanned aerial vehicles in python. This package provides an object-oriented interface for modeling and simulating motors, propellers, and airframe of a UAV. Furthermore, an Ardupilot integration implementation is provided through a JSON backend.
+Simulation of multi-rotor unmanned aerial vehicles in Python. This package provides an object-oriented interface for modeling and simulating motors, propellers, and airframe of a UAV. Furthermore, an Ardupilot integration implementation is provided through their [SITL JSON backend](https://github.com/ArduPilot/ardupilot/tree/6cb4e6b31da44c0e7531c7f0d60e2880ced11392/libraries/SITL/examples/JSON).
 
 ## Installation
 Clone repository and install for development. This will allow you to change the code of the package so the changes show up when you `import multirotor` in other projects.
@@ -38,6 +38,6 @@ takeoff 10
 ### Using a ground control system
 To run more advanced flights, you can download a Ground Control system.  
 IQ_GNC Tutorial: [QGroundControl](https://github.com/Intelligent-Quads/iq_tutorials/blob/master/docs/installing_qgc.md)  
-Instead of running commands from terminal, you can set flights from the ground control system instead
+Instead of running commands from terminal, you can set flights from the ground control system instead.
 ### Logging
 You can run the blocks in the ArduPilotPython.ipynb file to see the logs of the drone flight.
