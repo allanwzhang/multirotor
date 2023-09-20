@@ -16,7 +16,7 @@ pip install -e .
 pip install -e .[DEV]
 ```
 
-Make sure Ardupilot is installed. If not follow these instructions: [18.04](https://github.com/allanwzhang/python-gazebo/blob/main/installArdupilot18.md), [20.04](https://github.com/allanwzhang/python-gazebo/blob/main/installArdupilot20.md)
+Make sure Ardupilot and X forwarding application is installed. If not follow these instructions for Linux OS: [18.04](https://github.com/allanwzhang/python-gazebo/blob/main/installArdupilot18.md), [20.04](https://github.com/allanwzhang/python-gazebo/blob/main/installArdupilot20.md)
 
 ## Usage
 ### Start Python
