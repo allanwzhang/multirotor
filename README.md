@@ -24,6 +24,7 @@ cd ArduCopter
 sim_vehicle.py -v ArduCopter -f octa --model JSON --console
 # may need to run conda deactivate first
 ```
+Note: Make sure X forwarding application is on (if running on windows os)
 ### Start Python
 From multirotor directory, open up ArdupilotPython.ipynb file and run blocks to start the connection.
 ### Control Parameters
