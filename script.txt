@@ -1,0 +1,8 @@
+#!/bin/bash
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate uav
+cd ~/multirotor && python ap_python_sim.py &
+PID=$!
+conda deactivate
+cd ~/ardupilot/ArduCopter/ && sim_vehicle.py -v ArduCopter -f octa --model JSON --map --console
+kill $PID
