@@ -52,12 +52,6 @@ vp = VehicleParams(
 )
 sp = SimulationParams(dt=0.0025, g=9.81)
 
-# sinusodal wind model (not used)
-def wind(t, m):
-    w_inertial = np.asarray([5 * np.sin(t * 2 * np.pi / 4000), 0, 0])
-    dcm = direction_cosine_matrix(*m.orientation)
-    return inertial_to_body(w_inertial, dcm)
-
 def changeToJSONString(curr_time, state, accel):
     phys_time = curr_time
     pos = state[0:3].tolist()
@@ -108,8 +102,6 @@ def ap_sim(env, sock, steps=600000, disturbance=None):
     TIME_STEP = 1/RATE_HZ
     last_frame = -1
     frame_count = 0
-    frame_time = time.time()
-    print_frame_count = 500
 
     for i in range(0, steps):
         try:   
@@ -157,8 +149,8 @@ def ap_sim(env, sock, steps=600000, disturbance=None):
             # Calculate accel and put data into required JSON format
             accel = env.vehicle.dxdt_speeds(0, state, action, disturb_forces=disturb_force, disturb_torques=disturb_torque)[3:6]
             accel[2] = -9.8
-            if disturbance is not None:
-                accel[2] += disturb_force[2] # Change accel z frame to body
+            # if disturbance is not None:
+            #     accel[2] += disturb_force[2] # Change accel z frame to body
             JSON_string = changeToJSONString(curr_time, state, accel)
 
             # Send JSON of new state back to AP
@@ -178,6 +170,9 @@ def ap_sim(env, sock, steps=600000, disturbance=None):
     ap_log.done_logging()   
     
     return ap_log, command_logger
+
+def wind(t, m):
+    return np.array([50, 0, 0])
 
 def start_program(vp, sp, UDP_IP="127.0.0.1", UDP_PORT=9002, wind=None):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -226,4 +221,4 @@ vp = VehicleParams(
 )
 sp = SimulationParams(dt=0.0025, g=9.81)
 
-start_program(vp, sp)
+start_program(vp, sp, wind=wind)
