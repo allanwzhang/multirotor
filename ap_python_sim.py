@@ -91,10 +91,17 @@ def changeToJSONString(curr_time, state, accel):
 
     return JSON_string
 
+def send_velocity(vx, vy, vz, client_socket, server_address):
+    message = str(vx)+","+str(vy)+","+str(vz)
+    message = message.encode('utf-8')
+    client_socket.sendto(message, server_address)
+
 def ap_sim(env, sock, steps=600000, disturbance=None):
     ap_log = DataLog(env.vehicle, other_vars=("propeller_speed",))
     command_logger = {}
-    
+
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server_address = ('127.0.0.1', 1234)
     disturb_force, disturb_torque = 0., 0
 
     curr_time = 0  # Get the current time in seconds
@@ -138,8 +145,9 @@ def ap_sim(env, sock, steps=600000, disturbance=None):
     
             string_action = " ".join(str(element) for element in action.tolist())
 
-            if disturbance is not None and action[0] != 0:
+            if disturbance is not None and action[0] != 0 and env.vehicle.position[2] > 9.5:
                 disturb_force = disturbance(i, env.vehicle)
+                send_velocity(curr_time*10, 0, 0, client_socket, server_address)
 
             # Find new state of the vehicle given these commands
             state, *_ = env.step(
